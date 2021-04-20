@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECIPES APP</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+<body>
+    <h1>Top recipes</h1>
+    <button type="button"  id="btnRefresh" class="btn btn-success btn-md">refresh</button>
+
+    <br>
+    
+
+    <div class="container">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>temp</th>
+                    <th>dinner note</th>
+                    <th>notes </th>
+                    <th>votes</th>
+                </tr>
+                
+            </thead>
+            <tbody  id="recname">
+
+            </tbody>
+    
+        </table>
+    </div>
+    
+
+
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function (){
+            
+
+        $("#btnRefresh").click(function(){
+        
+            $("#recname").html("");
+        $.get("http://127.0.0.1:8000/", function(data){
+            // Display the returned data in browser
+            
+            $.each(data, function(key, value) { 
+                $("#recname").append(
+                    "<tr>"+
+                    "<td>" + value["title"] + "</td>" +
+                    "<td>" + value["temp"] + "</td>" +
+                    "<td>" + value["dinnersNote"] + "</td>" +
+                    "<td>" + value["note"] + "</td>" +
+                    "<td>" + value["votes"] + "</td>"+
+                    "</tr>"
+                );
+            });
+            
+        });
+
+        });
+            
+        })
+            
+        
+    </script>
+</body>
+</html>
